@@ -5,7 +5,7 @@ EstimatedTime=-(perfData.loadEventEnd-perfData.navigationStart)
 time=((EstimatedTime/1000)%50)*10;$('.loadbar').animate({width:width+"%"},time/0.8);let preloader__count=document.querySelector('.preloader__counter'),start=0,end=100,duration=time+400;animateValue(preloader__count,start,end,duration);setTimeout(()=>{gsap.to('.inner-loadbar',{force3D:true,width:'100%',duration:1,delay:0.1,ease:'Power2.easeOut',onComplete:()=>{gsap.set('.loadbar',{visibility:'hidden',opacity:0});gsap.to('#preloader',{force3D:true,duration:0.7,yPercent:-101,delay:0.6,ease:'Power2.easeInOut'});}});},time)
 function animateValue(id,start,end,duration){let range=end-start,current=start,increment=end>start?1:-1,stepTime=Math.abs(Math.floor(duration/range));let timer=setInterval(()=>{current+=increment;id.textContent=current;if(current==end){clearInterval(timer);}},stepTime)}
 document.addEventListener('DOMContentLoaded',Init())
-function Init(){menuToggle();ballCursor();bgTilt();scrollBar();gsap.set($('.section-header .page-title'),{opacity:0,transform:'translate3d(0,15vh,0)',delay:0})
+function Init(){menuToggle();ballCursor();bgTilt();scrollBar();toggleMedia();gsap.set($('.section-header .page-title'),{opacity:0,transform:'translate3d(0,15vh,0)',delay:0})
 gsap.set($('.section-header .page-title span'),{opacity:0,transform:'translate3d(0,15vh,0)',delay:0})
 gsap.set($('.section-header .page-subtitle'),{opacity:0,transform:'translate3d(0,15vh,0)',delay:0})
 gsap.to($('.section-header .page-title'),{duration:0.4,force3D:true,opacity:1,y:0,delay:0.95,ease:'Power2.easeOut'})
@@ -27,3 +27,4 @@ $('.swiper-button-prev, .swiper-button-next').mouseleave(function(){gsap.to(curs
 function bgTilt(){let maxTilt=3;let elem=document.querySelector('#showcase-tilt');gsap.set('#showcase-tilt',{transformPerspective:2000,transformOrigin:"center"});let bgTilt=gsap.to('#showcase-tilt',{duration:1,scale:1.05,ease:Power1.easeOut,paused:true});document.addEventListener('mousemove',(event)=>{bgTilt.vars.rotationY=((event.pageX/window.screen.width)*(maxTilt*2))-maxTilt
 bgTilt.vars.rotationX=(((event.pageY-elem.offsetTop)/window.screen.height)*(maxTilt*2))-maxTilt;bgTilt.invalidate().restart();})}
 function scrollBar(){Scrollbar.init(document.querySelector('.content'));}
+function toggleMedia(){$('.photo-gallery').click(function(e){e.preventDefault();$('.product-thumb-slider').toggleClass('show');});}

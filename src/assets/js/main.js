@@ -45,6 +45,7 @@ function Init() {
     ballCursor();
     bgTilt();
     scrollBar();
+    toggleMedia();
 
     gsap.set($('.section-header .page-title'), {opacity: 0, transform: 'translate3d(0,15vh,0)', delay: 0})
     gsap.set($('.section-header .page-title span'), {opacity: 0, transform: 'translate3d(0,15vh,0)', delay: 0})
@@ -158,4 +159,12 @@ function bgTilt() {
 
 function scrollBar() {
     Scrollbar.init(document.querySelector('.content'));
+}
+
+function toggleMedia() {
+    $('.photo-gallery').click(function (e) { 
+        e.preventDefault();
+        
+        $('.product-thumb-slider').toggleClass('show');
+    });
 }
