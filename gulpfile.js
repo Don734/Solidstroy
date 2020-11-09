@@ -11,13 +11,13 @@ function html() {
 }
 
 function css() {
-    return src('./src/assets/sass/style.sass')
+    return src('./src/assets/css/main.sass')
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(dest('./dist/assets/css'))
 }
 
 function js() {
-    return src('./src/assets/js/main.js')
+    return src('./src/assets/js/*.js')
         .pipe(jsmin())
         .pipe(dest('./dist/assets/js'))
 }
@@ -35,9 +35,15 @@ function copyFont() {
         .pipe(dest('./dist/assets/css/fonts/'))
 }
 
+function copyVideo() {
+    return src('./src/assets/video/*.mp4')
+        .pipe(dest('./dist/assets/video'))
+}
+
 exports.html = html;
 exports.css = css;
 exports.js = js;
 exports.image = image;
 exports.copyFont = copyFont;
-exports.default = series(html, css, js, image, copyFont);
+exports.copyVideo = copyVideo;
+exports.default = series(html, css, js, image, copyFont, copyVideo);
